@@ -1,3 +1,4 @@
+import { s3Storage } from '@payloadcms/storage-s3'
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 
@@ -69,6 +70,20 @@ export default buildConfig({
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: process.env.S3_BUCKET || '', //fallback idk?
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.S3_REGION || '',
+        // ... Other S3 configuration
+      },
+    }),
   ],
   secret: process.env.PAYLOAD_SECRET,
   sharp,

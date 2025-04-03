@@ -1,8 +1,13 @@
+/* === globals.css === */
+
+/* Import Tailwind's base, components, and utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* --- Base Layer Customizations --- */
 @layer base {
+  /* Reset heading styles if needed (consider if you actually want this globally) */
   h1,
   h2,
   h3,
@@ -13,76 +18,149 @@
     font-weight: unset;
   }
 
+  /* Default (Light Theme) CSS Variables */
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 100%; /* white */
+    --foreground: 222.2 84% 4.9%; /* almost black */
 
-    --card: 240 5% 96%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 240 5% 96%; /* light grey */
+    --card-foreground: 222.2 84% 4.9%; /* almost black */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%; /* white */
+    --popover-foreground: 222.2 84% 4.9%; /* almost black */
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 222.2 47.4% 11.2%; /* dark blue */
+    --primary-foreground: 210 40% 98%; /* very light grey/blue */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 40% 96.1%; /* light grey/blue */
+    --secondary-foreground: 222.2 47.4% 11.2%; /* dark blue */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 96.1%; /* light grey/blue */
+    --muted-foreground: 215.4 16.3% 46.9%; /* muted grey */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 40% 96.1%; /* light grey/blue */
+    --accent-foreground: 222.2 47.4% 11.2%; /* dark blue */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84.2% 60.2%; /* red */
+    --destructive-foreground: 210 40% 98%; /* very light grey/blue */
 
-    --border: 240 6% 80%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 240 6% 80%; /* grey */
+    --input: 214.3 31.8% 91.4%; /* light grey/blue */
+    --ring: 222.2 84% 4.9%; /* almost black */
 
-    --radius: 0.2rem;
+    --radius: 0.2rem; /* border radius */
 
-    --success: 196 52% 74%;
-    --warning: 34 89% 85%;
-    --error: 10 100% 86%;
+    --success: 196 52% 74%; /* light cyan/green */
+    --warning: 34 89% 85%; /* light orange */
+    --error: 10 100% 86%; /* light red */
   }
 
-  
+  /* Dark Theme CSS Variables - Define these if you want to override the defaults globally */
+  /* If Payload/NextJS/your theme provider injects the .dark class and handles */
+  /* base dark variables elsewhere, you might not need this block. */
+  /* Example: */
+  /*
+  .dark {
+    --background: 222.2 84% 4.9%; // almost black
+    --foreground: 210 40% 98%; // very light grey/blue
+
+    --card: 222.2 47.4% 11.2%; // dark blue
+    --card-foreground: 210 40% 98%; // very light grey/blue
+
+    // ... define dark versions for all other variables ...
+    --border: 215.4 16.3% 46.9%; // muted grey
+    --input: 215.4 16.3% 46.9%; // muted grey
+    --ring: 210 40% 98%; // very light grey/blue
+  }
+  */
 }
 
+/* --- Base Element Styling --- */
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border; /* Apply default border color */
   }
   body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    @apply bg-background text-foreground; /* Apply background and text color using CSS variables */
+    min-height: 100vh;
+    /* Consider removing flex unless body *really* needs to be a flex container */
+    /* @apply flex flex-col; */
   }
 }
 
+/* --- Theme Switching Opacity --- */
+/* Used for smooth transitions if you switch themes dynamically */
 html {
   opacity: 0;
+  transition: opacity 0.3s ease-in-out; /* Example transition */
 }
 
-
+/* Show content once theme is determined */
 html[data-theme='light'],
-html[data-theme='dark'] {
+html[data-theme='dark'],
+html.light, /* Adding .light and .dark class selectors as they are common */
+html.dark {
   opacity: initial;
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-
+/* --- Custom Components --- */
 @layer components {
     .btn {
-        @apply  px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center tracking-tight
+        @apply px-4 py-2 rounded-lg font-medium inline-flex items-center justify-center tracking-tight;
     }
     .btn-primary {
-            @apply bg-[#81c642] text-white
+            @apply bg-[#81c642] text-white; /* Consider using CSS variables if possible */
     }
     .btn-text {
-        @apply text-black bg-transparent
+        @apply text-black bg-transparent; /* Consider using CSS variables */
     }
 }
+
+
+/* --- CUSTOM OVERRIDE FOR PAYLOAD RICH TEXT IN DARK MODE --- */
+/*
+  This section overrides the default `dark:prose-invert` styles
+  provided by @tailwindcss/typography specifically for elements
+  matching `.payload-richtext.prose` when dark mode is active.
+  We target the CSS variables used by the prose plugin.
+*/
+html.dark .payload-richtext.prose,
+html[data-theme='dark'] .payload-richtext.prose {
+
+
+  --tw-prose-body: black;
+  --tw-prose-headings: black;
+  --tw-prose-lead: black; /* Lead paragraphs */
+  --tw-prose-links: black; /* We'll add underline below for visibility */
+  --tw-prose-bold: black;
+  --tw-prose-counters: black; /* Ordered list numbers */
+  --tw-prose-bullets: black; /* Unordered list bullets */
+  --tw-prose-hr: #e5e7eb; /* Horizontal rule - make it light gray */
+  --tw-prose-quotes: black;
+  --tw-prose-quote-borders: #e5e7eb; /* Quote borders - light gray */
+  --tw-prose-captions: black;
+  --tw-prose-code: black; /* Inline code */
+  --tw-prose-pre-code: black; /* Code blocks */
+  --tw-prose-th-borders: #d1d5db; /* Table header borders - gray */
+  --tw-prose-td-borders: #e5e7eb; /* Table cell borders - light gray */
+  --tw-prose-thead: black; /* Table headings */
+
+
+  --tw-prose-pre-bg: #f3f4f6; /* Tailwind gray-100 */
+
+
+
+  /* Ensure any other inverted colors/backgrounds are reset if needed */
+  --tw-prose-invert-body: black;
+  --tw-prose-invert-headings: black;
+  /* ... add any other --tw-prose-invert-... vars you need to force black ... */
+}
+
+/* Add underline to links within dark mode prose for visibility */
+html.dark .payload-richtext.prose a,
+html[data-theme='dark'] .payload-richtext.prose a {
+  text-decoration: underline;
+  text-decoration-color: #9ca3af; /* Example: gray-400 for underline color */
+
+}
+
