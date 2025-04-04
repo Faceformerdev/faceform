@@ -4,9 +4,11 @@ import { motion } from 'framer-motion'
 
 export const Hero = () => {
   return (
-    <section className="w-full pt-16 pb-20 md:pt-24 md:pb-10 bg-[radial-gradient(ellipse_50%_100%_at_bottom_left,#3CB371a75,#EAEEFE_170%)]">
+    <section className="w-full pt-1 pb-5 md:pt-8 md:pb-10 sm:pb-8 sm:pt-16   bg-[radial-gradient(ellipse_50%_100%_at_bottom_left,#3CB371a75,#EAEEFE_170%)]">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center relative gap-8 lg:gap-40"> {/* Added gap here */}
+        <div className="flex pt-1 flex-col md:flex-row items-center relative gap-8 lg:gap-40">
+          {' '}
+          {/* Added gap here */}
           <div className="w-full md:w-1/2 lg:max-w-lg z-10">
             <div className="text-sm inline-flex border border-[#222]/10 px-3 py-1 rounded-lg tracking-tight">
               FaceFormer®
@@ -27,8 +29,7 @@ export const Hero = () => {
               </button>
             </div>
           </div>
-
-          <div className="w-full md:w-1/2 mt-8 md:mt-0 flex justify-end ">
+          <div className="w-full md:w-1/2 mt-1 md:mt-0 flex justify-end ">
             <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-full flex justify-center lg:right-15 md:justify-end ">
               <motion.img
                 src={FaceFormerTrans.src}
