@@ -191,7 +191,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | MediaTextBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -1700,6 +1700,29 @@ export interface Auth {
   [k: string]: unknown;
 }
 
+export interface MediaTextBlock {
+  media: string | Media;
+  text: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  mediaPosition: 'left' | 'right';
+  imageSize: 'small' | 'medium' | 'large';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'mediaText';
+}
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}
