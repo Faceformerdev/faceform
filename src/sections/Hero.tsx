@@ -25,7 +25,9 @@ export const Hero = () => {
                 <button className="btn btn-primary">Shop</button>
               </a>
               <button className="btn btn-text gap-1">
-                <span>Mehr Erfahren</span>
+                <a href="/wissen">
+                  <span>Mehr Erfahren</span>
+                </a>
               </button>
             </div>
           </div>
