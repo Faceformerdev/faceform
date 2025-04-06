@@ -39,6 +39,70 @@ export const hero: Field = {
       required: true,
     },
     {
+      name: 'alignment',
+      type: 'select',
+      defaultValue: 'center',
+      label: 'Text Alignment',
+      options: [
+        {
+          label: 'Left',
+          value: 'left',
+        },
+        {
+          label: 'Center',
+          value: 'center',
+        },
+        {
+          label: 'Right',
+          value: 'right',
+        },
+      ],
+    },
+    {
+      name: 'verticalAlignment',
+      type: 'select',
+      defaultValue: 'center',
+      label: 'Vertical Position',
+      options: [
+        {
+          label: 'Top',
+          value: 'top',
+        },
+        {
+          label: 'Center',
+          value: 'center',
+        },
+        {
+          label: 'Bottom',
+          value: 'bottom',
+        },
+      ],
+    },
+    {
+      name: 'headingColor',
+      type: 'select',
+      defaultValue: 'white',
+      label: 'Heading Color',
+      options: [
+        {
+          label: 'White',
+          value: 'white',
+        },
+        {
+          label: 'Black',
+          value: 'black',
+        },
+        {
+          label: 'Primary',
+          value: 'primary',
+        },
+        {
+          label: 'Secondary',
+          value: 'secondary',
+        },
+      ],
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({

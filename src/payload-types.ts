@@ -148,6 +148,7 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
+  categories?: (string | Category)[];
   hero: {
     type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {

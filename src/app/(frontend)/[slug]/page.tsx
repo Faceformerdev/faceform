@@ -12,6 +12,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import { RelatedPages } from '@/components/RelatedPages'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -66,15 +67,26 @@ export default async function Page({ params: paramsPromise }: Args) {
   const { hero, layout } = page
 
   return (
-    <article className="pt-0 pb-12  ">
+    <article className="pt-0 pb-12">
       <PageClient />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
 
       {draft && <LivePreviewListener />}
 
-      <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} />
+      <div className="relative">
+        <div className="pt-[10.4rem] sticky top-0 z-10">
+          <RenderHero {...hero} />
+        </div>
+        <div className="relative z-20 bg-background">
+          <div className="max-w-8xl mx-auto px-4 lg:px-[calc(2rem+16rem)]">
+            <RenderBlocks blocks={layout} />
+          </div>
+          <div className="lg:absolute lg:right-0 lg:top-[1rem] lg:h-full lg:w-64 mt-8 lg:mt-0">
+            <RelatedPages currentPage={page} className="sticky top-24" />
+          </div>
+        </div>
+      </div>
     </article>
   )
 }

@@ -3,15 +3,12 @@ import { FAQs } from './FAQ'
 import { Hero } from '@/sections/Hero'
 import Testimonials from './Testimonials'
 
-
 export const Homepage = () => {
   return (
     <>
-      
       <Hero />
-      <Testimonials/>
+      <Testimonials />
       <FAQs />
-     
     </>
   )
 }

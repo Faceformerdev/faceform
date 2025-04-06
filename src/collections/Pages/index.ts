@@ -72,6 +72,15 @@ export const Pages: CollectionConfig<'pages'> = {
       required: true,
     },
     {
+      name: 'categories',
+      type: 'relationship',
+      relationTo: 'categories',
+      hasMany: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       type: 'tabs',
       tabs: [
         {
