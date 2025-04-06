@@ -46,8 +46,10 @@ export const SplitScreenBlock: React.FC<Props> = ({ richText, timelineItems, ali
               {timelineItems.map((item, index) => (
                 <div key={index} className="relative flex items-start gap-4">
                   {/* Icon Container */}
-                  <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-card border border-border flex items-center justify-center">
-                    <Media resource={item.icon} className="w-8 h-8 object-contain" fill={false} />
+                  <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-card border border-border overflow-hidden">
+                    <div className="absolute inset-0">
+                      <Media resource={item.icon} fill imgClassName="object-cover object-center" />
+                    </div>
                   </div>
 
                   {/* Content */}
