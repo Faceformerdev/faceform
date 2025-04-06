@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import type { Page } from '@/payload-types'
 
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import configPromise from '@payload-config'
@@ -82,9 +83,11 @@ export default async function Page({ params: paramsPromise }: Args) {
           <div className="max-w-8xl mx-auto px-4 lg:px-[calc(2rem+16rem)]">
             <RenderBlocks blocks={layout} />
           </div>
-          <div className="lg:absolute lg:right-0 lg:top-[1rem] lg:h-full lg:w-64 mt-8 lg:mt-0">
-            <RelatedPages currentPage={page} className="sticky top-24" />
-          </div>
+          {page && 'id' in page && (
+            <div className="lg:absolute lg:right-0 lg:top-[1rem] lg:h-full lg:w-64 mt-8 lg:mt-0">
+              <RelatedPages currentPage={page as Page} className="sticky top-24" />
+            </div>
+          )}
         </div>
       </div>
     </article>

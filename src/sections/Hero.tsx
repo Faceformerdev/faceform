@@ -1,6 +1,7 @@
 'use client'
 import FaceFormerTrans from '@/assets/faceformertrans.png'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 export const Hero = () => {
   return (
@@ -25,9 +26,9 @@ export const Hero = () => {
                 <button className="btn btn-primary">Shop</button>
               </a>
               <button className="btn btn-text gap-1">
-                <a href="/wissen">
+                <Link href="/wissen">
                   <span>Mehr Erfahren</span>
-                </a>
+                </Link>
               </button>
             </div>
           </div>

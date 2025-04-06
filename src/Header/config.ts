@@ -51,9 +51,7 @@ export const Header: GlobalConfig = {
       admin: {
         initCollapsed: true,
         components: {
-          RowLabel: ({ data }) => {
-            return data?.platform || 'Social Media Link'
-          },
+          RowLabel: '@/Header/SocialMediaRowLabel#SocialMediaRowLabel',
         },
       },
     },
