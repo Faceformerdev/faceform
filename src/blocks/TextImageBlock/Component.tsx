@@ -2,6 +2,7 @@ import React from 'react'
 import { Media } from '@/payload-types'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
+import Image from 'next/image'
 
 type Props = {
   media: Media
@@ -123,7 +124,14 @@ export const TextImageBlock: React.FC<Props> = ({
                   sizeClasses[imageSize],
                 )}
               >
-                <img src={media.url} alt="" className="object-cover w-full h-full shadow-lg" />
+                <Image
+                  src={media.url || ''}
+                  alt={media.alt || ''}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover shadow-lg"
+                  priority={false}
+                />
               </div>
             )}
             <div

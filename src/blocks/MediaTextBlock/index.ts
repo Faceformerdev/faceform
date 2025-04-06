@@ -1,4 +1,4 @@
-import { Block } from 'payload/types'
+import { Block } from 'payload'
 import { MediaTextBlock as MediaTextBlockComponent } from './Component'
 
 export const MediaTextBlock: Block = {

@@ -2,6 +2,7 @@ import React from 'react'
 import { Media } from '@/payload-types'
 import RichText from '@/components/RichText'
 import { cn } from '@/utilities/ui'
+import Image from 'next/image'
 
 type Props = {
   media: Media
@@ -35,10 +36,13 @@ export const MediaTextBlock: React.FC<Props> = ({
         >
           <div className={cn('relative aspect-video', sizeClasses[imageSize])}>
             {media?.url && (
-              <img
+              <Image
                 src={media.url}
                 alt={media.alt || ''}
-                className="object-cover w-full h-full rounded-lg"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover rounded-lg"
+                priority={false}
               />
             )}
           </div>
