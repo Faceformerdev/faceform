@@ -25,6 +25,38 @@ export const Header: GlobalConfig = {
         },
       },
     },
+    {
+      name: 'socialMedia',
+      type: 'array',
+      fields: [
+        {
+          name: 'platform',
+          type: 'select',
+          required: true,
+          options: [
+            { label: 'Facebook', value: 'facebook' },
+            { label: 'Twitter', value: 'twitter' },
+            { label: 'Instagram', value: 'instagram' },
+            { label: 'LinkedIn', value: 'linkedin' },
+            { label: 'YouTube', value: 'youtube' },
+          ],
+        },
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+        },
+      ],
+      maxRows: 5,
+      admin: {
+        initCollapsed: true,
+        components: {
+          RowLabel: ({ data }) => {
+            return data?.platform || 'Social Media Link'
+          },
+        },
+      },
+    },
   ],
   hooks: {
     afterChange: [revalidateHeader],
