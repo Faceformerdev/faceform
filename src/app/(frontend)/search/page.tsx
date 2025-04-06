@@ -13,11 +13,12 @@ type Args = {
     q: string
   }>
 }
+
 export default async function Page({ searchParams: searchParamsPromise }: Args) {
   const { q: query } = await searchParamsPromise
   const payload = await getPayload({ config: configPromise })
 
-  const posts = await payload.find({
+  const searchResults = await payload.find({
     collection: 'search',
     depth: 1,
     limit: 12,
@@ -26,8 +27,8 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       slug: true,
       categories: true,
       meta: true,
+      doc: true,
     },
-    // pagination: false reduces overhead if you don't need totalDocs
     pagination: false,
     ...(query
       ? {
@@ -59,6 +60,16 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
       : {}),
   })
 
+  // Transform the search results to include the correct URL based on collection type
+  const transformedDocs = searchResults.docs.map((doc: any) => {
+    const isPage = doc.doc?.relationTo === 'pages'
+    return {
+      ...doc,
+      url: isPage ? `/${doc.slug}` : `/${doc.doc?.relationTo}/${doc.slug}`,
+      collection: doc.doc?.relationTo,
+    }
+  })
+
   return (
     <div className="pt-24 pb-24">
       <PageClient />
@@ -72,8 +83,8 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
         </div>
       </div>
 
-      {posts.totalDocs > 0 ? (
-        <CollectionArchive posts={posts.docs as CardPostData[]} />
+      {searchResults.totalDocs > 0 ? (
+        <CollectionArchive posts={transformedDocs as CardPostData[]} />
       ) : (
         <div className="container">No results found.</div>
       )}

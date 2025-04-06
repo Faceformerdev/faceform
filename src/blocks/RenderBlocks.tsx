@@ -12,6 +12,8 @@ import { SplitScreenBlock } from '@/blocks/SplitScreen/Component'
 import { MediaEmbedBlock } from '@/blocks/MediaEmbed/Component'
 import { HeaderBlock } from '@/blocks/Header/Component'
 import { TextImageBlock } from '@/blocks/TextImageBlock/Component'
+import { ColorBackgroundBlock } from '@/blocks/ColorBackgroundBlock/Component'
+import { TileSliderBlock } from '@/blocks/TileSlider/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -24,10 +26,12 @@ const blockComponents = {
   mediaEmbed: MediaEmbedBlock,
   header: HeaderBlock,
   textImage: TextImageBlock,
+  colorBackground: ColorBackgroundBlock,
+  tileSlider: TileSliderBlock,
 }
 
 export const RenderBlocks: React.FC<{
-  blocks: Page['layout'][0][]
+  blocks: Page['layout']
 }> = (props) => {
   const { blocks } = props
 
@@ -35,25 +39,19 @@ export const RenderBlocks: React.FC<{
 
   if (hasBlocks) {
     return (
-      <Fragment>
-        {blocks.map((block, index) => {
+      <div>
+        {blocks.map((block, i) => {
           const { blockType } = block
 
           if (blockType && blockType in blockComponents) {
             const Block = blockComponents[blockType]
 
-            if (Block) {
-              return (
-                <div className="my-16" key={index}>
-                  {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                  <Block {...block} disableInnerContainer />
-                </div>
-              )
-            }
+            return <Block key={`block-${i}`} {...block} />
           }
+
           return null
         })}
-      </Fragment>
+      </div>
     )
   }
 

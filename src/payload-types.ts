@@ -191,7 +191,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | MediaTextBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | MediaTextBlock | ColorBackgroundBlock | TileSliderBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -1017,6 +1017,8 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        colorBackground?: T | ColorBackgroundBlockSelect<T>;
+        tileSlider?: T | TileSliderBlockSelect<T>;
       };
   meta?:
     | T
@@ -1722,6 +1724,160 @@ export interface MediaTextBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'mediaText';
+}
+
+export interface ColorBackgroundBlock {
+  backgroundColor: 'primary' | 'secondary' | 'accent' | 'light-gray' | 'dark-gray';
+  padding: 'small' | 'normal' | 'large';
+  columns?: {
+    size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
+    contentType?: string | null;
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    textImage?: any;
+    mediaBlock?: any;
+    cta?: any;
+    mediaText?: any;
+    splitScreen?: any;
+    mediaEmbed?: any;
+    header?: any;
+    enableLink?: boolean | null;
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      appearance?: ('default' | 'outline') | null;
+    };
+    id?: string | null;
+  }[] | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'colorBackground';
+}
+
+export interface ColorBackgroundBlockSelect<T extends boolean = true> {
+  backgroundColor?: T;
+  padding?: T;
+  columns?:
+    | T
+    | {
+        size?: T;
+        contentType?: T;
+        richText?: T;
+        textImage?: T;
+        mediaBlock?: T;
+        cta?: T;
+        mediaText?: T;
+        splitScreen?: T;
+        mediaEmbed?: T;
+        header?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+
+export interface TileSliderBlock {
+  tiles: {
+    image: string | Media;
+    title: string;
+    description: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
+    link?: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      appearance?: ('default' | 'outline') | null;
+    };
+    id?: string | null;
+  }[];
+  tilesPerView?: number | null;
+  tileHeight?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'tileSlider';
+}
+
+export interface TileSliderBlockSelect<T extends boolean = true> {
+  tiles?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        description?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  tilesPerView?: T;
+  tileHeight?: T;
+  id?: T;
+  blockName?: T;
 }
 
 declare module 'payload' {

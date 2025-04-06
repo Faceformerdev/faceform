@@ -12,6 +12,8 @@ import { SplitScreen } from '../../blocks/SplitScreen'
 import { MediaEmbed } from '../../blocks/MediaEmbed'
 import { Header } from '../../blocks/Header'
 import { TextImage } from '../../blocks/TextImageBlock'
+import { ColorBackgroundBlock } from '../../blocks/ColorBackgroundBlock'
+import { TileSlider } from '../../blocks/TileSlider'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -91,6 +93,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 MediaEmbed,
                 Header,
                 TextImage,
+                ColorBackgroundBlock,
+                TileSlider,
               ],
               required: true,
               admin: {
