@@ -3,9 +3,14 @@ import { cn } from '@/utilities/ui'
 import RichText from '@/components/RichText'
 import { Media } from '@/components/Media'
 import type { Media as MediaType } from '@/payload-types'
+import { icons } from 'lucide-react'
+
+type IconName = keyof typeof icons
 
 type TimelineItem = {
-  icon: MediaType
+  iconType: 'image' | 'icon'
+  icon?: MediaType
+  iconName?: IconName
   title: string
   description: string
 }
@@ -14,10 +19,32 @@ type Props = {
   richText: any
   timelineItems: TimelineItem[]
   alignment: 'left' | 'right'
+  blockType?: string
 }
 
 export const SplitScreenBlock: React.FC<Props> = ({ richText, timelineItems, alignment }) => {
   const isTimelineLeft = alignment === 'left'
+
+  const renderIcon = (item: TimelineItem) => {
+    if (item.iconType === 'image' && item.icon) {
+      return (
+        <div className="absolute inset-0">
+          <Media resource={item.icon} fill imgClassName="object-cover object-center" />
+        </div>
+      )
+    }
+
+    if (item.iconType === 'icon' && item.iconName && item.iconName in icons) {
+      const Icon = icons[item.iconName]
+      return (
+        <div className="flex items-center justify-center w-full h-full">
+          <Icon className="w-8 h-8 text-foreground" />
+        </div>
+      )
+    }
+
+    return null
+  }
 
   return (
     <div className="container my-16">
@@ -47,9 +74,7 @@ export const SplitScreenBlock: React.FC<Props> = ({ richText, timelineItems, ali
                 <div key={index} className="relative flex items-start gap-4">
                   {/* Icon Container */}
                   <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-card border border-border overflow-hidden">
-                    <div className="absolute inset-0">
-                      <Media resource={item.icon} fill imgClassName="object-cover object-center" />
-                    </div>
+                    {renderIcon(item)}
                   </div>
 
                   {/* Content */}

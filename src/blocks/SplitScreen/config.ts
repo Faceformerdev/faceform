@@ -32,10 +32,38 @@ export const SplitScreen: Block = {
       minRows: 1,
       fields: [
         {
+          name: 'iconType',
+          type: 'select',
+          required: true,
+          defaultValue: 'image',
+          options: [
+            {
+              label: 'Image',
+              value: 'image',
+            },
+            {
+              label: 'Icon',
+              value: 'icon',
+            },
+          ],
+        },
+        {
           name: 'icon',
           type: 'upload',
           relationTo: 'media',
           required: true,
+          admin: {
+            condition: (data, siblingData) => siblingData?.iconType === 'image',
+          },
+        },
+        {
+          name: 'iconName',
+          type: 'text',
+          required: true,
+          admin: {
+            description: 'Enter the Lucide icon name (e.g., "User", "Settings", "Mail")',
+            condition: (data, siblingData) => siblingData?.iconType === 'icon',
+          },
         },
         {
           name: 'title',
@@ -67,7 +95,7 @@ export const SplitScreen: Block = {
     },
   ],
   labels: {
-    singular: 'Vertikale Timeline',
-    plural: 'Vertikale Timeline',
+    singular: 'Split Screen',
+    plural: 'Split Screens',
   },
 }

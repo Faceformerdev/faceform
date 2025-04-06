@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react'
-
+import React from 'react'
 import type { Page } from '@/payload-types'
 
 import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
@@ -15,6 +14,8 @@ import { TextImageBlock } from '@/blocks/TextImageBlock/Component'
 import { ColorBackgroundBlock } from '@/blocks/ColorBackgroundBlock/Component'
 import { TileSliderBlock } from '@/blocks/TileSlider/Component'
 
+type BlockType = Page['layout'][number]
+
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
@@ -28,7 +29,7 @@ const blockComponents = {
   textImage: TextImageBlock,
   colorBackground: ColorBackgroundBlock,
   tileSlider: TileSliderBlock,
-}
+} as const
 
 export const RenderBlocks: React.FC<{
   blocks: Page['layout']
@@ -41,12 +42,11 @@ export const RenderBlocks: React.FC<{
     return (
       <div>
         {blocks.map((block, i) => {
-          const { blockType } = block
+          const { blockType } = block as BlockType
+          const Component = blockComponents[blockType as keyof typeof blockComponents]
 
-          if (blockType && blockType in blockComponents) {
-            const Block = blockComponents[blockType]
-
-            return <Block key={`block-${i}`} {...block} />
+          if (Component) {
+            return <Component key={`block-${i}`} {...(block as any)} />
           }
 
           return null
