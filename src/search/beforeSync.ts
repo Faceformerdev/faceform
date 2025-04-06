@@ -19,8 +19,8 @@ export const beforeSyncWithSearch: BeforeSync = async ({ originalDoc, searchDoc 
     categories: [],
   }
 
-  if (categories && Array.isArray(categories) && categories.length > 0) {
-    // get full categories and keep a flattened copy of their most important properties
+  // Only process categories for posts, not for pages
+  if (collection === 'posts' && categories && Array.isArray(categories) && categories.length > 0) {
     try {
       const mappedCategories = categories.map((category) => {
         const { id, title } = category
