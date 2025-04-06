@@ -13,6 +13,7 @@ import { HeaderBlock } from '@/blocks/Header/Component'
 import { TextImageBlock } from '@/blocks/TextImageBlock/Component'
 import { ColorBackgroundBlock } from '@/blocks/ColorBackgroundBlock/Component'
 import { TileSliderBlock } from '@/blocks/TileSlider/Component'
+import { ButtonBlock } from '@/blocks/Button/Component'
 
 type BlockType = Page['layout'][number]
 
@@ -29,6 +30,7 @@ const blockComponents = {
   textImage: TextImageBlock,
   colorBackground: ColorBackgroundBlock,
   tileSlider: TileSliderBlock,
+  button: ButtonBlock,
 } as const
 
 export const RenderBlocks: React.FC<{

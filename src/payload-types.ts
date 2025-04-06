@@ -191,7 +191,7 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | MediaTextBlock | ColorBackgroundBlock | TileSliderBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | MediaTextBlock | ColorBackgroundBlock | TileSliderBlock | ButtonBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -1878,6 +1878,29 @@ export interface TileSliderBlockSelect<T extends boolean = true> {
   tileHeight?: T;
   id?: T;
   blockName?: T;
+}
+
+export interface ButtonBlock {
+  label: string
+  link: {
+    type: 'custom' | 'reference'
+    url?: string
+    reference?: {
+      relationTo: 'pages'
+      value: string | Page
+    }
+    newTab?: boolean
+  }
+  color: 'primary' | 'secondary' | 'accent' | 'custom'
+  customColor?: string
+  textColor: 'default' | 'white' | 'black' | 'custom'
+  customTextColor?: string
+  size: 'small' | 'medium' | 'large'
+  variant: 'solid' | 'outline' | 'ghost'
+  borderRadius: 'none' | 'small' | 'medium' | 'large' | 'full'
+  id?: string
+  blockName?: string
+  blockType: 'button'
 }
 
 declare module 'payload' {

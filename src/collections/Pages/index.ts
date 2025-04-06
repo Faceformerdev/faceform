@@ -14,6 +14,7 @@ import { Header } from '../../blocks/Header'
 import { TextImage } from '../../blocks/TextImageBlock'
 import { ColorBackgroundBlock } from '../../blocks/ColorBackgroundBlock'
 import { TileSlider } from '../../blocks/TileSlider'
+import { Button } from '../../blocks/Button'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -95,6 +96,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 TextImage,
                 ColorBackgroundBlock,
                 TileSlider,
+                Button,
               ],
               required: true,
               admin: {

@@ -7,6 +7,8 @@ import RichText from '@/components/RichText'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ButtonBlock } from '../Button/Component'
+import Image from 'next/image'
 
 type LinkType = {
   type: 'none' | 'internal' | 'external'
@@ -22,9 +24,24 @@ type LinkType = {
 type Tile = {
   image: any
   title: string
-  subtitle?: string
-  content: any
-  link?: LinkType
+  description?: string
+  link?: {
+    url: string
+    newTab?: boolean
+  }
+  showButton?: boolean
+  button?: {
+    label: string
+    link: {
+      type: 'custom'
+      url: string
+      newTab?: boolean
+    }
+    color: 'primary' | 'secondary' | 'accent' | 'custom'
+    customColor?: string
+    size: 'small' | 'medium' | 'large'
+    variant: 'solid' | 'outline' | 'ghost'
+  }
 }
 
 type DisplayOptions = {
@@ -185,12 +202,17 @@ export const TileSliderBlock: React.FC<TileSliderProps> = (props) => {
       >
         <div
           className={cn(
-            'relative w-full overflow-hidden',
+            'relative w-full overflow-hidden group',
             heightClass,
             tileStyle === 'overlay' && 'absolute inset-0 z-0',
           )}
         >
-          <Media resource={tile.image} fill imgClassName="object-cover object-center" />
+          <Image
+            src={tile.image?.url || ''}
+            alt={tile.image?.alt || tile.title}
+            fill
+            className="object-cover object-center transition-transform duration-300 group-hover:scale-110"
+          />
           {tileStyle === 'overlay' && (
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10" />
           )}
@@ -201,18 +223,38 @@ export const TileSliderBlock: React.FC<TileSliderProps> = (props) => {
             tileStyle === 'overlay' && 'absolute bottom-0 left-0 right-0 z-20 text-white',
           )}
         >
-          {tile.subtitle && (
-            <p className="text-sm font-medium mb-1 text-muted-foreground">{tile.subtitle}</p>
-          )}
           <h3 className="text-xl font-bold mb-2">{tile.title}</h3>
-          <RichText data={tile.content} enableGutter={false} />
+          {tile.description && (
+            <p className="text-sm text-muted-foreground mb-4">{tile.description}</p>
+          )}
+          {tile.showButton && tile.button && (
+            <ButtonBlock
+              label={tile.button.label}
+              link={tile.button.link}
+              color={tile.button.color}
+              customColor={tile.button.customColor}
+              size={tile.button.size}
+              variant={tile.button.variant}
+            />
+          )}
         </div>
       </div>
     )
 
     return (
       <div key={index} className={cn('flex-shrink-0 px-2', widthClass)}>
-        {tile.link ? renderLink(tile.link, tileContent) : tileContent}
+        {tile.link ? (
+          <Link
+            href={tile.link.url || '#'}
+            target={tile.link.newTab ? '_blank' : undefined}
+            rel={tile.link.newTab ? 'noopener noreferrer' : undefined}
+            className="block h-full"
+          >
+            {tileContent}
+          </Link>
+        ) : (
+          tileContent
+        )}
       </div>
     )
   }

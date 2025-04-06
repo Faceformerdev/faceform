@@ -15,6 +15,7 @@ import { MediaTextBlock } from '../MediaTextBlock'
 import { SplitScreen } from '../SplitScreen'
 import { MediaEmbed } from '../MediaEmbed'
 import { Header } from '../Header'
+import { Button } from '../Button'
 
 const columnFields: Field[] = [
   {
@@ -76,6 +77,10 @@ const columnFields: Field[] = [
       {
         label: 'Header',
         value: 'header',
+      },
+      {
+        label: 'Button',
+        value: 'button',
       },
     ],
   },
@@ -152,6 +157,14 @@ const columnFields: Field[] = [
       condition: (_, siblingData) => siblingData?.contentType === 'header',
     },
     fields: Header.fields,
+  },
+  {
+    name: 'button',
+    type: 'group',
+    fields: Button.fields,
+    admin: {
+      condition: (_, siblingData) => siblingData?.contentType === 'button',
+    },
   },
   {
     name: 'enableLink',

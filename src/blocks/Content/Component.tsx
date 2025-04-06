@@ -12,6 +12,7 @@ import { MediaTextBlock } from '../MediaTextBlock/Component'
 import { SplitScreenBlock } from '../SplitScreen/Component'
 import { MediaEmbedBlock } from '../MediaEmbed/Component'
 import { HeaderBlock } from '../Header/Component'
+import { ButtonBlock } from '../Button/Component'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const { columns } = props
@@ -35,6 +36,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
       splitScreen,
       mediaEmbed,
       header,
+      button,
       enableLink,
       link,
     } = col
@@ -61,6 +63,8 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         return mediaEmbed && <MediaEmbedBlock {...mediaEmbed} />
       case 'header':
         return header && <HeaderBlock {...header} />
+      case 'button':
+        return button && <ButtonBlock {...button} />
       default:
         return null
     }

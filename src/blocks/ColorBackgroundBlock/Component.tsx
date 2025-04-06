@@ -10,6 +10,7 @@ import { MediaTextBlock } from '../MediaTextBlock/Component'
 import { SplitScreenBlock } from '../SplitScreen/Component'
 import { MediaEmbedBlock } from '../MediaEmbed/Component'
 import { HeaderBlock } from '../Header/Component'
+import { ButtonBlock } from '../Button/Component'
 
 type BackgroundColor = 'primary' | 'secondary' | 'accent' | 'light-gray' | 'dark-gray'
 type PaddingSize = 'small' | 'normal' | 'large'
@@ -26,6 +27,7 @@ interface Column {
   splitScreen?: any
   mediaEmbed?: any
   header?: any
+  button?: any
   enableLink?: boolean
   link?: any
 }
@@ -72,6 +74,7 @@ export const ColorBackgroundBlock: React.FC<ColorBackgroundBlockProps> = (props)
       splitScreen,
       mediaEmbed,
       header,
+      button,
       enableLink,
       link,
     } = col
@@ -98,6 +101,8 @@ export const ColorBackgroundBlock: React.FC<ColorBackgroundBlockProps> = (props)
         return mediaEmbed && <MediaEmbedBlock {...mediaEmbed} />
       case 'header':
         return header && <HeaderBlock {...header} />
+      case 'button':
+        return button && <ButtonBlock {...button} />
       default:
         return null
     }

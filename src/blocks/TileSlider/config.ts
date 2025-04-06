@@ -39,75 +39,123 @@ export const TileSlider: Block = {
           required: true,
         },
         {
-          name: 'subtitle',
-          type: 'text',
-        },
-        {
-          name: 'content',
-          type: 'richText',
-          editor: lexicalEditor({
-            features: ({ rootFeatures }) => {
-              return [
-                ...rootFeatures,
-                HeadingFeature({ enabledHeadingSizes: ['h3', 'h4'] }),
-                FixedToolbarFeature(),
-                InlineToolbarFeature(),
-              ]
-            },
-          }),
+          name: 'description',
+          type: 'textarea',
         },
         {
           name: 'link',
           type: 'group',
           fields: [
             {
-              name: 'type',
-              type: 'select',
-              defaultValue: 'none',
-              options: [
+              name: 'url',
+              type: 'text',
+            },
+            {
+              name: 'newTab',
+              type: 'checkbox',
+              label: 'Open in new tab',
+            },
+          ],
+        },
+        {
+          name: 'button',
+          type: 'group',
+          admin: {
+            condition: (data, siblingData) => {
+              return siblingData?.showButton === true
+            },
+          },
+          fields: [
+            {
+              name: 'label',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'link',
+              type: 'group',
+              fields: [
                 {
-                  label: 'None',
-                  value: 'none',
+                  name: 'url',
+                  type: 'text',
+                  required: true,
                 },
                 {
-                  label: 'Internal',
-                  value: 'internal',
-                },
-                {
-                  label: 'External',
-                  value: 'external',
+                  name: 'newTab',
+                  type: 'checkbox',
+                  label: 'Open in new tab',
                 },
               ],
             },
             {
-              name: 'internalLink',
-              type: 'relationship',
-              relationTo: ['pages', 'posts'],
-              admin: {
-                condition: (data, siblingData) => siblingData?.type === 'internal',
-              },
+              name: 'color',
+              type: 'select',
+              options: [
+                {
+                  label: 'Primary',
+                  value: 'primary',
+                },
+                {
+                  label: 'Secondary',
+                  value: 'secondary',
+                },
+                {
+                  label: 'Accent',
+                  value: 'accent',
+                },
+                {
+                  label: 'Custom',
+                  value: 'custom',
+                },
+              ],
+              defaultValue: 'primary',
             },
             {
-              name: 'externalLink',
+              name: 'customColor',
               type: 'text',
               admin: {
-                condition: (data, siblingData) => siblingData?.type === 'external',
+                condition: (data, siblingData) => {
+                  return siblingData?.color === 'custom'
+                },
               },
             },
             {
-              name: 'label',
-              type: 'text',
-              admin: {
-                condition: (data, siblingData) => siblingData?.type !== 'none',
-              },
+              name: 'size',
+              type: 'select',
+              options: [
+                {
+                  label: 'Small',
+                  value: 'small',
+                },
+                {
+                  label: 'Medium',
+                  value: 'medium',
+                },
+                {
+                  label: 'Large',
+                  value: 'large',
+                },
+              ],
+              defaultValue: 'medium',
             },
             {
-              name: 'openInNewTab',
-              type: 'checkbox',
-              defaultValue: true,
-              admin: {
-                condition: (data, siblingData) => siblingData?.type !== 'none',
-              },
+              name: 'variant',
+              type: 'select',
+              options: [
+                {
+                  label: 'Solid',
+                  value: 'solid',
+                },
+                {
+                  label: 'Outline',
+                  value: 'outline',
+                },
+                {
+                  label: 'Ghost',
+                  value: 'ghost',
+                },
+              ],
+              defaultValue: 'solid',
             },
           ],
         },
