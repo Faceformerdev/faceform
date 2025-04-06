@@ -42,6 +42,29 @@ const columnFields: Field[] = [
     ],
   },
   {
+    name: 'shadow',
+    type: 'select',
+    defaultValue: 'none',
+    options: [
+      {
+        label: 'None',
+        value: 'none',
+      },
+      {
+        label: 'Small',
+        value: 'small',
+      },
+      {
+        label: 'Medium',
+        value: 'medium',
+      },
+      {
+        label: 'Large',
+        value: 'large',
+      },
+    ],
+  },
+  {
     name: 'contentType',
     type: 'select',
     defaultValue: 'richText',

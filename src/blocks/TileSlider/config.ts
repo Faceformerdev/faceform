@@ -155,7 +155,67 @@ export const TileSlider: Block = {
                   value: 'ghost',
                 },
               ],
-              defaultValue: 'solid',
+              required: true,
+            },
+            {
+              name: 'textColor',
+              type: 'select',
+              options: [
+                {
+                  label: 'Default',
+                  value: 'default',
+                },
+                {
+                  label: 'White',
+                  value: 'white',
+                },
+                {
+                  label: 'Black',
+                  value: 'black',
+                },
+                {
+                  label: 'Custom',
+                  value: 'custom',
+                },
+              ],
+              defaultValue: 'default',
+              required: true,
+            },
+            {
+              name: 'borderRadius',
+              type: 'select',
+              options: [
+                {
+                  label: 'None',
+                  value: 'none',
+                },
+                {
+                  label: 'Small',
+                  value: 'small',
+                },
+                {
+                  label: 'Medium',
+                  value: 'medium',
+                },
+                {
+                  label: 'Large',
+                  value: 'large',
+                },
+                {
+                  label: 'Full',
+                  value: 'full',
+                },
+              ],
+              defaultValue: 'medium',
+              required: true,
+            },
+            {
+              name: 'blockType',
+              type: 'text',
+              defaultValue: 'button',
+              admin: {
+                readOnly: true,
+              },
             },
           ],
         },

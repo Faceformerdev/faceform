@@ -41,6 +41,9 @@ type Tile = {
     customColor?: string
     size: 'small' | 'medium' | 'large'
     variant: 'solid' | 'outline' | 'ghost'
+    textColor: 'default' | 'white' | 'black' | 'custom'
+    borderRadius: 'none' | 'small' | 'medium' | 'large' | 'full'
+    blockType: 'button'
   }
 }
 
@@ -235,6 +238,9 @@ export const TileSliderBlock: React.FC<TileSliderProps> = (props) => {
               customColor={tile.button.customColor}
               size={tile.button.size}
               variant={tile.button.variant}
+              textColor={tile.button.textColor}
+              borderRadius={tile.button.borderRadius}
+              blockType={tile.button.blockType}
             />
           )}
         </div>
