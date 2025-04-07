@@ -145,8 +145,7 @@ export default function WissenPage() {
                 Trainingsgerätes sind ideal auf die dabei einwirkenden Kräfte optimiert.
               </p>
               <p className="text-lg">
-                1998 wurde der FaceFormer für 20 Jahre patentrechtlich geschützt. Seit seiner
-                Markteinführung im gleichen Jahr ist das Trainingsgerät auch offiziell als
+                 Seit seiner Markteinführung im Jahr 1998 ist das Trainingsgerät auch offiziell als
                 Medizinprodukt zugelassen.
               </p>
             </motion.div>
